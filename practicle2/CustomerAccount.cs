@@ -9,14 +9,14 @@ namespace practicle2
 {
     internal class CustomerAccount
     {
-        readonly string bank_name;
-        string customer_name;
-        long customer_accountNo;
-        public CustomerAccount(string cust_name,long cust_accNo)
+        readonly string BankName;
+        string CustomerName;
+        long CustomerAccountNo;
+        public CustomerAccount(string CustName,long CustAccNo)
         {
-            bank_name = "DCB BANK";
-            customer_accountNo = cust_accNo;
-            customer_name = cust_name;
+            BankName = "DCB BANK";
+            CustomerAccountNo = CustAccNo;
+            CustomerName = CustName;
         }
 
         //printInfo() method declare for display the passbook of user.
@@ -24,12 +24,12 @@ namespace practicle2
             public void PrintInfo()
         {
             Console.WriteLine("=======================");
-            Console.WriteLine($"WELCOME TO {bank_name}");
+            Console.WriteLine($"WELCOME TO {BankName}");
             Console.WriteLine("=======================");
             Console.WriteLine("=======Pass-Book=========\n");
                 
-            Console.WriteLine($"Customer Name: {customer_name}\n");
-            Console.WriteLine($"AccountNo: {customer_accountNo}\n");
+            Console.WriteLine($"Customer Name: {CustomerName}\n");
+            Console.WriteLine($"AccountNo: {CustomerAccountNo}\n");
             
             Console.WriteLine("=========================");
         }
