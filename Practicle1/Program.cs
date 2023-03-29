@@ -4,7 +4,7 @@
     {
         static void Main(string[] args)
         {
-            Calculator calsi = new Calculator();
+            Calculator calculator = new Calculator();
             DebuggingApplication dbug = new DebuggingApplication();
             int choice;
             while (true)
@@ -20,7 +20,7 @@
                     case 1:
                         {
                             
-                            calsi.Calculation();
+                            calculator.Calculation();
                             break;
                         }
                     case 2:
