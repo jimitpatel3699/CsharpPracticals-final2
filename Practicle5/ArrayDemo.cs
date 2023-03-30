@@ -8,15 +8,15 @@ namespace Practicle5
 {
     internal class ArrayDemo
     {
-        int[] int_array= new int[5];
+        int[] IntArray= new int[5];
 
-        public void getData()
+        public void GetData()
         {
             Console.WriteLine("Enter array elements");
-            for(int i=0; i<int_array.Length; i++) 
+            for(int i=0; i<IntArray.Length; i++) 
             {
                 Console.Write($"Enter int_aray[{i}]:");
-                int_array[i] = Convert.ToInt32(Console.ReadLine());
+                IntArray[i] = Convert.ToInt32(Console.ReadLine());
             }
 
         }
@@ -31,9 +31,9 @@ namespace Practicle5
             try
             {
                 Console.Write($"\narray indexes and elements are: ");
-                for (int i = 0; i <=int_array.Length ; i++)
+                for (int i = 0; i <=IntArray.Length ; i++)
                 {
-                    Console.Write($"index:[{i}],element:{int_array[i]} ");
+                    Console.Write($"index:[{i}],element:{IntArray[i]} ");
                        
                 }
             }catch(IndexOutOfRangeException Ex)

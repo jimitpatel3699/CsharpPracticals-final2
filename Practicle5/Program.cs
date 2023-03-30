@@ -4,9 +4,9 @@
     {
         static void Main(string[] args)
         {
-            ArrayDemo arr1 = new ArrayDemo();
-            arr1.getData();
-            arr1.PrintArray();
+            ArrayDemo arraydemo = new ArrayDemo();
+            arraydemo.GetData();
+            arraydemo.PrintArray();
 
         }
     }
