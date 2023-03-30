@@ -2,7 +2,7 @@
 {
     internal class Program
     {
-        enum options
+        enum Options
         {
             SRP = 1,
             OCP,
@@ -12,17 +12,17 @@
         }
         static void Main(string[] args)
         {
-            int choice, amount;
-            double discount = 0;
-            string username = null;
-            string password = null;
-            string bdate = null;
-            string gender=null;
-            double? mobile=null;
+            int Choice, Amount;
+            double Discount = 0;
+            string UserName = null;
+            string Password = null;
+            string Bdate = null;
+            string Gender=null;
+            double? Mobile=null;
 
 
 
-            ValidateData srp = new ValidateData();
+            ValidateData validatedata = new ValidateData();
 
 
             while (true)
@@ -35,20 +35,20 @@
                 Console.WriteLine("5.DIP demo");
                 Console.WriteLine("===========");
                 Console.Write("Enter your Choice:");
-                choice=Convert.ToInt32(Console.ReadLine());
+                Choice=Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine("===========");
 
-                options ch = (options)choice;
+                Options ch = (Options)Choice;
                 
                 switch (ch)
                 {
-                    case options.SRP:
+                    case Options.SRP:
                         {
                             Console.Write("\nEnter username:");
-                            username= Console.ReadLine();
+                            UserName= Console.ReadLine();
                             Console.Write("\nEnter password:");
-                            password= Console.ReadLine();
-                            if(srp.validate_info(username, password))
+                            Password= Console.ReadLine();
+                            if(validatedata.ValidateInfo(UserName, Password))
                             {
                                 Console.WriteLine("Login sucess");
                             }
@@ -58,54 +58,54 @@
                             }
                             break;
                         }
-                    case options.OCP:
+                    case Options.OCP:
                         {
                             Console.WriteLine("Enter Amount of Invoice:");
-                            amount= Convert.ToInt32(Console.ReadLine());
-                            if(amount<10000)
+                            Amount= Convert.ToInt32(Console.ReadLine());
+                            if(Amount<10000)
                             {
                                 FinalInvoice finalInvoice = new FinalInvoice();
-                                discount = finalInvoice.GetInvoiceDiscount(amount);
-                                Console.WriteLine($"final discount = {amount-discount}");
+                                Discount = finalInvoice.GetInvoiceDiscount(Amount);
+                                Console.WriteLine($"final discount = {Amount-Discount}");
                                 
-                            }else if(amount>=10000)
+                            }else if(Amount>=10000)
                             {
 
                                 ProposedInvoice proposedInvoice = new ProposedInvoice();
-                                discount= proposedInvoice.GetInvoiceDiscount(amount);
-                                Console.WriteLine($"final discount = {amount-discount}");
+                                Discount= proposedInvoice.GetInvoiceDiscount(Amount);
+                                Console.WriteLine($"final discount = {Amount-Discount}");
                             }
-                            Console.WriteLine($"final Amount Paid:{discount}");
+                            Console.WriteLine($"final Amount Paid:{Discount}");
                             break;
                         }
-                    case options.LSP:
+                    case Options.LSP:
                         {
                             
                             IFood food = new Pitza();
                             Console.WriteLine("\n-------------------------------------------------------------------------");
                             Console.WriteLine("IFood food = new pitza();");
-                            Console.WriteLine($"pitza class ingredients method food.Food_ing();:-> {food.Food_ing()}");
-                            Console.WriteLine($"pitza class origin method food.Food_origin();:->{food.Food_origin()}");
-                            Console.WriteLine($"pitza class food type method food.Food_type();:->{food.Food_type()}");
+                            Console.WriteLine($"pitza class ingredients method food.FoodIngrients();:-> {food.FoodIngrients()}");
+                            Console.WriteLine($"pitza class origin method food.FoodOrigin();:->{food.FoodOrigin()}");
+                            Console.WriteLine($"pitza class food type method food.FoodType();:->{food.FoodType()}");
                             
                             
                             food = new PavBhaji();
                             Console.WriteLine("-------------------------------------------------------------------------");
                             Console.WriteLine($"\nfood = new PavBhaji(); ");
-                            Console.WriteLine($"PavBhaji class ingredients method food.Food_ing();:-> {food.Food_ing()}");
-                            Console.WriteLine($"PavBhaji class origin method food.Food_origin();:->{food.Food_origin()}");
-                            Console.WriteLine($"PavBhaji class food type method food.Food_type();:->{food.Food_type()}");
+                            Console.WriteLine($"PavBhaji class ingredients method food.FoodIngrients();:-> {food.FoodIngrients()}");
+                            Console.WriteLine($"PavBhaji class origin method food.FoodOrigin();:->{food.FoodOrigin()}");
+                            Console.WriteLine($"PavBhaji class food type method food.FoodType();:->{food.FoodType()}");
                             
                             
                             food = new PaniPuri();
                             Console.WriteLine("-------------------------------------------------------------------------");
                             Console.WriteLine($"\nfood = new panipuri(); ");
-                            Console.WriteLine($"PaniPuri class ingredients method food.Food_ing();:-> {food.Food_ing()}");
-                            Console.WriteLine($"PaniPuri class origin method food.Food_origin();:->{food.Food_origin()}");
-                            Console.WriteLine($"PaniPuri class food type method food.Food_type();:->{food.Food_type()}");
+                            Console.WriteLine($"PaniPuri class ingredients method food.FoodIngrients();:-> {food.FoodIngrients()}");
+                            Console.WriteLine($"PaniPuri class origin method food.FoodOrigin();:->{food.FoodOrigin()}");
+                            Console.WriteLine($"PaniPuri class food type method food.FoodType();:->{food.FoodType()}");
                             break;
                         }
-                    case options.ISP:
+                    case Options.ISP:
                         {
                             //Using HPLaserJetPrinter we can access all Printer Services
                             Console.WriteLine("\n-------------------------------------------------------------------------");
@@ -123,11 +123,11 @@
                             liquidInkjetPrinter.Scan("Scanning");
                             break;
                         }
-                    case options.DIP:
+                    case Options.DIP:
                         {
                             
-                            Student std1 = new Student(RepositoryFactory.GetStudentRepository());
-                            std1.Save();
+                            Student student = new Student(RepositoryFactory.GetStudentRepository());
+                            student.Save();
                             break;
                         }
                 }

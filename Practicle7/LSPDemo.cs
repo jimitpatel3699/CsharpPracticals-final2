@@ -9,24 +9,24 @@ namespace Practicle7
     //create one interface IFood which is parent for all available classes and which is ensure derived class replace it.
     interface IFood
     {
-        string Food_type();
-        string Food_ing();
-        string Food_origin();
+        string FoodType();
+        string FoodIngrients();
+        string FoodOrigin();
         
     }
     internal class Pitza : IFood
     {
-        public string Food_type()
+        public string FoodType()
         {
             return "fastfood";
         }
 
-        public string Food_ing()
+        public string FoodIngrients()
         {
             return "pitzabase,cheese,sauce...";
         }
 
-        public string Food_origin()
+        public string FoodOrigin()
         {
             return "itely";
         }
@@ -35,17 +35,17 @@ namespace Practicle7
 
     internal class PavBhaji : IFood
     {
-        public string Food_ing()
+        public string FoodIngrients()
         {
             return "pav,bhaji,butter...";
         }
 
-        public string Food_origin()
+        public string FoodOrigin()
         {
             return "india";
         }
 
-        public string Food_type()
+        public string FoodType()
         {
             return "fastfood";
         }
@@ -53,17 +53,17 @@ namespace Practicle7
 
     internal class PaniPuri : IFood
     {
-        public string Food_ing()
+        public string FoodIngrients()
         {
             return "patato,puri,beans,water...";
         }
 
-        public string Food_origin()
+        public string FoodOrigin()
         {
             return "india";
         }
 
-        public string Food_type()
+        public string FoodType()
         {
             return "fastfood";
         }

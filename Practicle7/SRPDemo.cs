@@ -20,15 +20,15 @@ namespace Practicle7
     internal class ValidateData
     {
         
-        public bool validate_info(string username, string password)
+        public bool ValidateInfo(string UserName, string Password)
         {
-            bool status = false;
-            if (username!="" && password!="")
+            bool Status = false;
+            if (UserName!="" && Password!="")
             {
-                status = Login.Login_user(username, password);
+                Status = Login.Login_user(username, Password);
 
             }
-            if (status)
+            if (Status)
             {
                 return true;
             }
@@ -37,15 +37,15 @@ namespace Practicle7
                 return false;
             }
         }
-        public bool validate_info(string username, string pass, double mobile, string bdate, string gender)
+        public bool ValidateInfo(string UserName, string Pass, double Mobile, string Bdate, string Gender)
         {
-            bool status = false;
-            if (username != "" && pass != "" && mobile != null && bdate != "" && gender !="")
+            bool Status = false;
+            if (UserName != "" && Pass != "" && Mobile != null && Bdate != "" && Gender !="")
             {
-                status = Register.Register_user(username, pass, mobile, bdate, gender);
+                Status = Register.RegisterUser(UserName, Pass, Mobile, Bdate, Gender);
 
             }
-            if (status)
+            if (Status)
             {
                 return true;
             }
@@ -58,10 +58,10 @@ namespace Practicle7
     //Login class which have only responsibility to check user data in db and available then select.
     internal static class Login
     {
-        public static bool Login_user(string username, string pass)
+        public static bool LoginUser(string UserName, string Pass)
         {
             //code select user data from database
-              Console.WriteLine($"Welcome! {username}");
+              Console.WriteLine($"Welcome! {UserName}");
                return true;
             
            
@@ -74,7 +74,7 @@ namespace Practicle7
 
     internal static class Register
     {
-        public static bool Register_user(string username, string pass, double mobile, string bdate, string gender)
+        public static bool RegisterUser(string UserName, string Pass, double Mobile, string Bdate, string Gender)
         {
 
             //insert user data and register it in to db.
