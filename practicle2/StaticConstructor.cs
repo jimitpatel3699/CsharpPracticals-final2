@@ -10,10 +10,10 @@ namespace practicle2
     {
         static public string Division;
         public int Id;
-        static StaticConstructor() //static staticConstructor(int i) not allowed because staic constructor not take any arguments
+        static StaticConstructor() //static StaticConstructor(int i) not allowed because staic constructor not take any arguments
         {
             Division = "Csp";
-            //j = 1; not [ossible only allowed static member intialization
+            
             Console.WriteLine($"value of  division is in static constuctor {Division}\n");
         }
         public StaticConstructor(int Sid)
