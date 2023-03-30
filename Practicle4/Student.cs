@@ -14,10 +14,10 @@ namespace Practicle4
         public string Name;
         public decimal[] Marks = new decimal[5];
         public static decimal AverageMarks;
-        public string grade;
-        public Student(string name)
+        public string Grade;
+        public Student(string Sname)
         {
-            Name = name;
+            Name = Sname;
         }
 
         //create enum for perform switch case operations
@@ -31,7 +31,7 @@ namespace Practicle4
         }
         
         //getmarks() method for taking student marks[5]
-        public void getmarks()
+        public void Getmarks()
         {
             Console.WriteLine($"Enter Marks of {Name}");
             for (int i = 0; i < Marks.Length; i++)
@@ -54,26 +54,26 @@ namespace Practicle4
         {
             if (marks >= 90)
             {
-                grade = "A";
+                Grade = "A";
             }
             else if(marks >= 80)
             {
-                grade="B";
+                Grade="B";
             }
             else if(marks>=70)
             {
-                grade="C";
+                Grade="C";
             }
             else if(marks<70)
             {
-                grade="D";
+                Grade="D";
             }
 
-            return grade;
+            return Grade;
         }
 
         //Opetions()is the method which one calling by object after the student marks getting..
-        public void Opetions()
+        public void ChooseOptions()
         {
             while (true)
             {
