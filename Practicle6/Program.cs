@@ -4,9 +4,9 @@
     {
         static void Main(string[] args)
         {
-            ProcessBusinessLogic bl = new ProcessBusinessLogic();
-            bl.ProcessCompleted += bl_ProcessCompleted; // register with an event
-            bl.StartProcess();
+            ProcessBusinessLogic processlogic = new ProcessBusinessLogic();
+            processlogic.ProcessCompleted += bl_ProcessCompleted; // register with an event
+            processlogic.StartProcess();
         }
         // event handler
         public static void bl_ProcessCompleted()

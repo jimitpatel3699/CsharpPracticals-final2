@@ -7,9 +7,11 @@ using System.Threading.Tasks;
 namespace Practicle6
 {
     public delegate void Notify(); //delegate
+    
     internal class ProcessBusinessLogic
     {
         public event Notify ProcessCompleted; // event
+
         public void StartProcess()
         {
             Console.WriteLine("Process Started!");
