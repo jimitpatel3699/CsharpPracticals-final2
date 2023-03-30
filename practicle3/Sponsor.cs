@@ -9,6 +9,6 @@ namespace practicle3
     //cerate base class for perform inheritance demo
     internal class Sponsor
     {
-        protected string owner = "Rakuteen";
+        protected string Owner = "Rakuteen";
     }
 }

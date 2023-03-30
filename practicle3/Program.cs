@@ -8,8 +8,8 @@
             Console.WriteLine("\nInheritance Demo\n");
             Console.WriteLine("=====================");
             Team tm1 = new Team("CSK");
-            string team_owner = tm1.printInfo();
-            Console.WriteLine($"{team_owner}");
+            string Teamowner = tm1.printInfo();
+            Console.WriteLine($"{Teamowner}");
             Console.WriteLine("=====================");
 
             //Polymorphism Demo
