@@ -301,16 +301,20 @@ namespace Practicle8
             }
 
             //check receiver acount number is valid
-            UserAccount ReceiverAccountNum = new UserAccount();
-            foreach(var account in userAccountsList)
+            UserAccount ReceiverAccount;
+            ReceiverAccount = selectedAccount;
+            foreach(UserAccount userAccount in userAccountsList)
             {
-                if(account.AccountNumber == internalTransfer.ReciepeintAccNum)
+                
+                if(userAccount.AccountNumber == internalTransfer.ReciepeintAccNum)
                 {
-                    ReceiverAccountNum.AccountNumber= account.AccountNumber;
+                    ReceiverAccount= userAccount;
+                    break;
                 }        
             }
-            if (ReceiverAccountNum.AccountNumber == 0)
+            if (ReceiverAccount.AccountNumber != internalTransfer.ReciepeintAccNum || ReceiverAccount.AccountNumber == selectedAccount.AccountNumber)
             {
+                Console.WriteLine($"{ReceiverAccount.AccountNumber}");
                 Utility.PrintMessage("transfer failed due to receiver account number invalid ", false);
                 return;
             }
@@ -321,11 +325,13 @@ namespace Practicle8
                 selectedAccount.AccountBalance -= internalTransfer.TransferAmount;
 
                 //add transaction record at receiver side
-                InsertTransaction(ReceiverAccountNum.Id, TransactionType.Transfer, internalTransfer.TransferAmount, $"{selectedAccount.AccountNumber}");
+                InsertTransaction(ReceiverAccount.Id, TransactionType.Transfer, internalTransfer.TransferAmount, $"{selectedAccount.AccountNumber}");
 
                 //update balance of receiver
-                ReceiverAccountNum.AccountBalance += internalTransfer.TransferAmount;
-                
+                ReceiverAccount.AccountBalance += internalTransfer.TransferAmount;
+                Utility.PrintMessage($"transfer of {Utility.FormatAmout(internalTransfer.TransferAmount)} succesfully to receiver account.\nReceiver Account number:{ReceiverAccount.AccountNumber}\nReceiver Name:{ReceiverAccount.FullName} ", true);
+                return;
+
             }
             }
     }
