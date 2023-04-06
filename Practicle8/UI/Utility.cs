@@ -5,25 +5,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Security.Cryptography;
+using Practicle8.Domain.Entities;
 
 namespace Practicle8.UI
 {
     internal static class Utility
     {
-        private static long tranID;
         private static CultureInfo culture = new CultureInfo("hi-IN"); 
-
-        public static long GetTransactionID()
+        public static string GetTransactionID()
         {
-            return ++tranID;
+            return GenerateId.GuId();
         }
-        public static string GetSecretInput(string prompt)
+        public static string GetUserInput(string prompt)
+        {
+            Console.WriteLine($"Enter {prompt}");
+            return Console.ReadLine();
+        }
+        public static string GetUserInput(string prompt,string key)
         {
             bool isPrompt = true;
             string asterics = "";
-
             StringBuilder input = new StringBuilder();
-
             while (true)
             {
                 if(isPrompt)
@@ -32,7 +34,6 @@ namespace Practicle8.UI
                 }
                 isPrompt=false;
                 ConsoleKeyInfo inputKey =Console.ReadKey(true);
-
                 if(inputKey.Key == ConsoleKey.Enter)
                 {
                     if(input.Length==4)
@@ -49,25 +50,17 @@ namespace Practicle8.UI
                 }
                 if (inputKey.Key == ConsoleKey.Backspace && input.Length > 0)
                 {
-                    input.Remove(input.Length - 1, 1);
+                    input.Remove(input.Length-1, 1);
                 }else if(inputKey.Key != ConsoleKey.Backspace)
                 {
                     input.Append(inputKey.KeyChar);
-                    Console.Write(asterics + "*");
+                    Console.Write(asterics + key);
                 }
             }
             return input.ToString();
-        }
-
-
-        public static string GetUserInput(string prompt) {
-            Console.WriteLine($"Enter {prompt}");
-            return Console.ReadLine();
-        }
-
+        }        
         public static void PrintDotAnimation(int timer =10)
-        {
-            
+        {            
             for (int i = 0; i < timer; i++)
             {
                 Console.Write(".");
@@ -81,7 +74,6 @@ namespace Practicle8.UI
             Console.WriteLine("Press Enter to Continue...\n");
             Console.ReadLine();
         }
-
         public static void PrintMessage(string msg,bool success=true)
         {
             if(success)
@@ -95,9 +87,7 @@ namespace Practicle8.UI
             Console.WriteLine("\n"+msg);
             Console.ForegroundColor=ConsoleColor.White;
             PressEnter();
-
         }
-
         public static string FormatAmout(decimal amt)
         {
             

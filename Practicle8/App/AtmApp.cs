@@ -4,22 +4,19 @@ using Practicle8.Domain.Enums;
 using Practicle8.Domain.Interfaces;
 using Practicle8.UI;
 
-
 namespace Practicle8
 {
-    internal class AtmApp : IUserLogin,IUserAccountActions,ITransaction
+    internal class AtmApp : TransactionData,IUserLogin,IUserAccountActions
     {
         private List<UserAccount> userAccountsList;
         private UserAccount selectedAccount;
         private List<Transaction> _listofTransactionsl;
         private const decimal minimumKeptAmount = 500;
         private readonly AppScreen screen;
-
         public AtmApp()
         {
             screen = new AppScreen();
         }
-
         public void Run()
         {
             AppScreen.Welcome();
@@ -29,21 +26,18 @@ namespace Practicle8
             {
                 AppScreen.DisplayAppMenu();
                 ProcessMenuoption();
-            }
-            
+            }            
         }
         public void InitializeData()
         {
             userAccountsList = new List<UserAccount>
             {
-                new UserAccount{Id=1,FullName="jimit patel",AccountNumber=123456,CardNumber=321321,CardPin=3699,AccountBalance=5000.00m,IsLocked=false },
-                new UserAccount{Id=2,FullName="saurabh mishra",AccountNumber=654321,CardNumber=123123,CardPin=3699,AccountBalance=50000.00m,IsLocked=false },
-                new UserAccount{Id=3,FullName="jagu patel",AccountNumber=901692,CardNumber=789987,CardPin=3699,AccountBalance=50000.00m,IsLocked=false },
+                new UserAccount{Id=1,FullName="jimit patel",AccountNumber=123456,CardNumber=321321,CardPin=3699,AccountBalance=5000.00m,IsLocked=false,WithdrawlAmount=0 },
+                new UserAccount{Id=2,FullName="saurabh mishra",AccountNumber=654321,CardNumber=123123,CardPin=3699,AccountBalance=50000.00m,IsLocked=false,WithdrawlAmount=0 },
+                new UserAccount{Id=3,FullName="jagu patel",AccountNumber=901692,CardNumber=789987,CardPin=3699,AccountBalance=50000.00m,IsLocked=false , WithdrawlAmount = 0},
             };
-
             _listofTransactionsl = new List<Transaction>();
         }
-
         public void CheckUserCardNumAndPassword()
         {
             bool isCorrectLogin = false;
@@ -51,7 +45,6 @@ namespace Practicle8
             {
                 UserAccount inputAccount = AppScreen.UserLoginform();
                 AppScreen.LoginProgress();
-
                 foreach (UserAccount account in userAccountsList)
                 {
                     selectedAccount = account;
@@ -86,11 +79,8 @@ namespace Practicle8
                         Console.Clear();
                     }
                 }
-
             }
         }
-
-
         private void ProcessMenuoption()
         {
             switch(Validator.Convert<int>("an option:"))
@@ -135,31 +125,27 @@ namespace Practicle8
                     }
             }
         }
-
         public void CheckBalance()
         {
             Utility.PrintMessage($"Your account balance is :{Utility.FormatAmout(selectedAccount.AccountBalance)}");
         }
-
         public void PlaceDeposite()
         {
             Console.WriteLine($"\nOnly multiple of 100 and 500 Rs. notes allowed.\n");
             var TransactionAmt = Validator.Convert<int>($"amount {AppScreen.cur}");
-
             //counting
             Console.WriteLine("\nChecking and Counting notes.");
             Utility.PrintDotAnimation();
             Console.WriteLine("");
-
             if(TransactionAmt<=0)
             {
                 Utility.PrintMessage("Amount needs to be greater than zero. Try again.", false);
                 return;
             }
-            if(TransactionAmt%100!=0) {
-            
+            if(TransactionAmt%100!=0) 
+            {            
                 Utility.PrintMessage($"Enter deposite amount in multiple of 100 or 500. Try again",false);
-                    return;
+                return;
             }
             if(PreviewBanknotesCount(TransactionAmt)==false)
             {
@@ -167,42 +153,45 @@ namespace Practicle8
                 return;
             }
             InsertTransaction(selectedAccount.Id, TransactionType.Deposit, TransactionAmt, "");
-
-
             //update account balance
-
             selectedAccount.AccountBalance += TransactionAmt;
-
             //print success message
-
-            Utility.PrintMessage($"Your deposite of {Utility.FormatAmout(TransactionAmt)} wa succesful",true);
+            Utility.PrintMessage($"Your deposite of {Utility.FormatAmout(TransactionAmt)} was succesful",true);
         }
-
         public void MakeWithDrawal()
         {
+            Console.WriteLine($"withdrawl till now{selectedAccount.WithdrawlAmount}");
             var transactionAmt = 0;
-            int selectedAmount = AppScreen.SelectAmount();
-            
+            int selectedAmount = AppScreen.SelectAmount();            
             if(selectedAmount!=0)
             {
                 transactionAmt= selectedAmount;
-            }
-            //else
-            //{
-            //    transactionAmt = Validator.Convert<int>($"amount {AppScreen.cur}");
-            //}
-
+            }           
             //input validation
             if(transactionAmt<=0)
             {
                 Utility.PrintMessage("Amount needs to be greter than zero.", false);
                 return;
-            }else if(transactionAmt%100!=0)
+            }
+            else if (transactionAmt > 20000)
+            {
+                Utility.PrintMessage("Withdrawl amount needs to be less than 20,000.", false);
+                return;
+            }else if(selectedAccount.WithdrawlAmount + transactionAmt > 20000)
+            {
+                Utility.PrintMessage($"{transactionAmt} is Exceeds withdrawal amount limits ", false);
+                return;
+            }
+            else if(selectedAccount.WithdrawlAmount>20000 )
+            {
+                Utility.PrintMessage("Exceeds withdrawal amount limits", false);
+                return;
+            }
+            else if(transactionAmt%100!=0)
             {
                 Utility.PrintMessage("Amount needs to be multiply of 100 or 500.", false);
                 return;
             }
-
             //business logic validation
             if(transactionAmt>selectedAccount.AccountBalance)
             {
@@ -218,29 +207,31 @@ namespace Practicle8
             InsertTransaction(selectedAccount.Id, TransactionType.Withdrawal, -transactionAmt, "");
             //update account balance
             selectedAccount.AccountBalance -= transactionAmt;
+            //add withdrawl amount
+            selectedAccount.WithdrawlAmount += transactionAmt;
             //success message
-            Utility.PrintMessage($"You have successfully withdrawl {Utility.FormatAmout(transactionAmt)}", true);
-
-        
+            Utility.PrintMessage($"You have successfully withdrawl {Utility.FormatAmout(transactionAmt)}", true);        
         }
-
         private bool PreviewBanknotesCount(int amount)
         {
             int fiveHundredNotesCount = amount / 500;
             int oneHundredNotescount = (amount % 500) / 100;
-
             Console.WriteLine("\nSummary");
             Console.WriteLine("---------");
-            Console.WriteLine($"{AppScreen.cur}500 X {fiveHundredNotesCount}");
-            Console.WriteLine($"{AppScreen.cur}100 X {oneHundredNotescount}");
-            Console.WriteLine($"Total amount: {Utility.FormatAmout(amount)}\n\n");
-
+            if(fiveHundredNotesCount>0)
+            {
+                Console.WriteLine($"{AppScreen.cur}500 X {fiveHundredNotesCount}");
+            }
+            if(oneHundredNotescount>0)
+            {
+                Console.WriteLine($"{AppScreen.cur}100 X {oneHundredNotescount}");
+            }
+            Console.WriteLine("---------");
+            Console.WriteLine($"\nTotal amount: {Utility.FormatAmout(amount)}\n\n");
             int opt = Validator.Convert<int>("1 to Confirm");
             return opt.Equals(1);
-
         }
-
-        public void InsertTransaction(long _UserBankAccountId, TransactionType _tranType, decimal _tranAmount, string _desc)
+        public override void InsertTransaction(long _UserBankAccountId, TransactionType _tranType, decimal _tranAmount, string _desc)
         {
             //create new transaction object
             var transaction = new Transaction()
@@ -251,14 +242,11 @@ namespace Practicle8
                 TransactionType= _tranType,
                 TransactionAmount= _tranAmount,
                 Description= _desc
-
             };
-
             //add transaction object to thr list
             _listofTransactionsl.Add(transaction);
         }
-
-        public void ViewTransaction()
+        public override void ViewTransaction()
         {
            var filteredTransactionList = _listofTransactionsl.Where(t=>t.UserBankAccountId==selectedAccount.Id).ToList();
             //check if data available or not
@@ -278,7 +266,6 @@ namespace Practicle8
                 Utility.PrintMessage($"You have {filteredTransactionList.Count} transaction", true);
             }
         }
-
         private void ProcessInternalTransfer(InternalTransfer internalTransfer)
         {
             if( internalTransfer.TransferAmount<=0 ) 
@@ -292,47 +279,50 @@ namespace Practicle8
                 Utility.PrintMessage("Balance insufficints to transfer. transfer failed", false);
                 return;
             }
-
             //check the minimum kept amount
             if((selectedAccount.AccountBalance-internalTransfer.TransferAmount)<minimumKeptAmount)
             {
                 Utility.PrintMessage("Transfer failed due to minimum maitain balance ", false);
                 return;
             }
-
             //check receiver acount number is valid
             UserAccount ReceiverAccount;
             ReceiverAccount = selectedAccount;
             foreach(UserAccount userAccount in userAccountsList)
-            {
-                
+            {               
                 if(userAccount.AccountNumber == internalTransfer.ReciepeintAccNum)
                 {
                     ReceiverAccount= userAccount;
                     break;
                 }        
             }
-            if (ReceiverAccount.AccountNumber != internalTransfer.ReciepeintAccNum || ReceiverAccount.AccountNumber == selectedAccount.AccountNumber)
-            {
-                Console.WriteLine($"{ReceiverAccount.AccountNumber}");
-                Utility.PrintMessage("transfer failed due to receiver account number invalid ", false);
+            if (ReceiverAccount.AccountNumber == selectedAccount.AccountNumber)
+            {                
+                Utility.PrintMessage("transfer failed! in same account transfer not allowed.", false);
                 return;
             }
-            else {
+            else if(ReceiverAccount.AccountNumber != internalTransfer.ReciepeintAccNum)
+            {                
+                Utility.PrintMessage("transfer failed due to receiver account number invalid ", false);
+                return;
+            }else if(ReceiverAccount.FullName != internalTransfer.ReciepeintName)
+            {
+                Utility.PrintMessage("transfer failed due to receiver name not match ", false);
+                return;
+            }
+            else 
+            {
                 //add transaction at sender side
                 InsertTransaction(selectedAccount.Id, TransactionType.Transfer, -internalTransfer.TransferAmount, $"{internalTransfer.ReciepeintAccNum}");
                 //update balance of sender
                 selectedAccount.AccountBalance -= internalTransfer.TransferAmount;
-
                 //add transaction record at receiver side
                 InsertTransaction(ReceiverAccount.Id, TransactionType.Transfer, internalTransfer.TransferAmount, $"{selectedAccount.AccountNumber}");
-
                 //update balance of receiver
                 ReceiverAccount.AccountBalance += internalTransfer.TransferAmount;
                 Utility.PrintMessage($"transfer of {Utility.FormatAmout(internalTransfer.TransferAmount)} succesfully to receiver account.\nReceiver Account number:{ReceiverAccount.AccountNumber}\nReceiver Name:{ReceiverAccount.FullName} ", true);
                 return;
-
             }
-            }
+        }       
     }
 }

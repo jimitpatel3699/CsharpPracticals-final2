@@ -11,6 +11,5 @@ namespace Practicle8.Domain.Entities
         public decimal TransferAmount { get; set; }
         public long ReciepeintAccNum { get; set; }
         public string ReciepeintName { get; set; }
-
     }
 }

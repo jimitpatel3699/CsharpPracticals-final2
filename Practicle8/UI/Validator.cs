@@ -13,10 +13,8 @@ namespace Practicle8.UI
         {
             bool valid = false;
             string userInput;
-
             while (!valid)
             {
-
                 userInput = Utility.GetUserInput(prompt);
                 try
                 {

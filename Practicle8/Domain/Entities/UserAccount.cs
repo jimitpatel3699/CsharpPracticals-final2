@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace Practicle8.Domain.Entities
 {
-    public class UserAccount
+    public sealed class UserAccount
     {
         public int Id { get; set; }
         public long CardNumber { get; set; }
         public int CardPin { get; set; }
-
         public long AccountNumber { get; set; }
         public string FullName { get; set; }
         public decimal AccountBalance { get; set; }
         public int TotalLogin { get; set; }
         public bool IsLocked { get; set; }
+        public decimal WithdrawlAmount { get; set; }
     }
 }
