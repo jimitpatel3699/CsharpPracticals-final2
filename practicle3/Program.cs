@@ -1,4 +1,4 @@
-﻿namespace practicle3
+﻿namespace Practicle3
 {
     internal class Program
     {
@@ -7,8 +7,8 @@
             //Inheritance Demo
             Console.WriteLine("\nInheritance Demo\n");
             Console.WriteLine("=====================");
-            Team tm1 = new Team("CSK");
-            string Teamowner = tm1.printInfo();
+            Team team1 = new Team("CSK");
+            string Teamowner = team1.printInfo();
             Console.WriteLine($"{Teamowner}");
             Console.WriteLine("=====================");
 
