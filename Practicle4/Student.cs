@@ -39,8 +39,7 @@ namespace Practicle4
         }
         //CalculateAverageMarks() calculare average of student and return the average.
         public decimal CalculateAverageMarks()
-        {
-       
+        {       
             AverageMarks = Marks.Average();
             return AverageMarks;
         }
