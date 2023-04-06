@@ -19,12 +19,7 @@
             string Bdate = null;
             string Gender=null;
             double? Mobile=null;
-
-
-
             ValidateData validatedata = new ValidateData();
-
-
             while (true)
             {
                 Console.WriteLine("\n===========");
@@ -37,9 +32,7 @@
                 Console.Write("Enter your Choice:");
                 Choice=Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine("===========");
-
-                Options ch = (Options)Choice;
-                
+                Options ch = (Options)Choice;               
                 switch (ch)
                 {
                     case Options.SRP:
@@ -66,11 +59,9 @@
                             {
                                 FinalInvoice finalInvoice = new FinalInvoice();
                                 Discount = finalInvoice.GetInvoiceDiscount(Amount);
-                                Console.WriteLine($"final discount = {Amount-Discount}");
-                                
+                                Console.WriteLine($"final discount = {Amount-Discount}");                                
                             }else if(Amount>=10000)
                             {
-
                                 ProposedInvoice proposedInvoice = new ProposedInvoice();
                                 Discount= proposedInvoice.GetInvoiceDiscount(Amount);
                                 Console.WriteLine($"final discount = {Amount-Discount}");
@@ -79,24 +70,19 @@
                             break;
                         }
                     case Options.LSP:
-                        {
-                            
+                        {                            
                             IFood food = new Pitza();
                             Console.WriteLine("\n-------------------------------------------------------------------------");
                             Console.WriteLine("IFood food = new pitza();");
                             Console.WriteLine($"pitza class ingredients method food.FoodIngrients();:-> {food.FoodIngrients()}");
                             Console.WriteLine($"pitza class origin method food.FoodOrigin();:->{food.FoodOrigin()}");
-                            Console.WriteLine($"pitza class food type method food.FoodType();:->{food.FoodType()}");
-                            
-                            
+                            Console.WriteLine($"pitza class food type method food.FoodType();:->{food.FoodType()}");                                                        
                             food = new PavBhaji();
                             Console.WriteLine("-------------------------------------------------------------------------");
                             Console.WriteLine($"\nfood = new PavBhaji(); ");
                             Console.WriteLine($"PavBhaji class ingredients method food.FoodIngrients();:-> {food.FoodIngrients()}");
                             Console.WriteLine($"PavBhaji class origin method food.FoodOrigin();:->{food.FoodOrigin()}");
-                            Console.WriteLine($"PavBhaji class food type method food.FoodType();:->{food.FoodType()}");
-                            
-                            
+                            Console.WriteLine($"PavBhaji class food type method food.FoodType();:->{food.FoodType()}");                                                        
                             food = new PaniPuri();
                             Console.WriteLine("-------------------------------------------------------------------------");
                             Console.WriteLine($"\nfood = new panipuri(); ");
@@ -124,15 +110,13 @@
                             break;
                         }
                     case Options.DIP:
-                        {
-                            
+                        {                            
                             Student student = new Student(RepositoryFactory.GetStudentRepository());
                             student.Save();
                             break;
                         }
                 }
-            }
-            
+            }            
         }
     }
 }
