@@ -7,7 +7,6 @@
             ArrayDemo arraydemo = new ArrayDemo();
             arraydemo.GetData();
             arraydemo.PrintArray();
-
         }
     }
 }

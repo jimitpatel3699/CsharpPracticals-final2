@@ -9,7 +9,6 @@ namespace Practicle5
     internal class ArrayDemo
     {
         int[] IntArray= new int[5];
-
         public void GetData()
         {
             Console.WriteLine("Enter array elements");
@@ -18,23 +17,16 @@ namespace Practicle5
                 Console.Write($"Enter int_aray[{i}]:");
                 IntArray[i] = Convert.ToInt32(Console.ReadLine());
             }
-
         }
 
         public void PrintArray()
         {
-            //foreach (int i in int_array)
-            //{
-            //    Console.WriteLine($"array members: {i}");
-
-            //}
             try
             {
                 Console.Write($"\narray indexes and elements are: ");
                 for (int i = 0; i <=IntArray.Length ; i++)
                 {
-                    Console.Write($"index:[{i}],element:{IntArray[i]} ");
-                       
+                    Console.Write($"index:[{i}],element:{IntArray[i]} ");                      
                 }
             }catch(IndexOutOfRangeException Ex)
             {
