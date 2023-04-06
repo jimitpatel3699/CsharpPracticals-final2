@@ -19,7 +19,6 @@ namespace Practicle4
         {
             Name = Sname;
         }
-
         //create enum for perform switch case operations
         enum Options
         {
@@ -27,9 +26,7 @@ namespace Practicle4
             MinMark = 2,
             MaximumMark = 3,
             Grade = 4
-
-        }
-        
+        }       
         //getmarks() method for taking student marks[5]
         public void Getmarks()
         {
@@ -37,8 +34,7 @@ namespace Practicle4
             for (int i = 0; i < Marks.Length; i++)
             {
                 Console.Write($"Enter Marks[{i + 1}]:");
-                Marks[i] = Convert.ToDecimal(Console.ReadLine());
-                
+                Marks[i] = Convert.ToDecimal(Console.ReadLine());                
             }
         }
         //CalculateAverageMarks() calculare average of student and return the average.
@@ -48,7 +44,6 @@ namespace Practicle4
             AverageMarks = Marks.Average();
             return AverageMarks;
         }
-
         //CalculateGrade() to calculate grade and returen it take student average marks as a parameter.
         public string CalculateGrade(decimal marks)
         {
@@ -71,7 +66,6 @@ namespace Practicle4
 
             return Grade;
         }
-
         //Opetions()is the method which one calling by object after the student marks getting..
         public void ChooseOptions()
         {

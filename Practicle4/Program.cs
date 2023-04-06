@@ -4,8 +4,7 @@
     {
         static void Main(string[] args)
         {
-            Student student= new Student("jimit patel");
-     
+            Student student= new Student("jimit patel");     
             student.Getmarks();
             student.ChooseOptions();
         }
