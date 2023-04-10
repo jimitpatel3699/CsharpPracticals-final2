@@ -72,9 +72,9 @@ namespace Practicle8.UI
         internal InternalTransfer InternalTransferForm()
         {
             var InternalTransfer = new InternalTransfer();
-            InternalTransfer.ReciepeintAccNum = Validator.Convert<long>("recipient account number:");
+            InternalTransfer.ReciepeintAccNum = Validator.Convert<long>("recipient account number to whom you have to transfer :");
             InternalTransfer.TransferAmount = Validator.Convert<decimal>($"amount {cur} ");
-            InternalTransfer.ReciepeintName = Utility.GetUserInput("recipints name:");
+            InternalTransfer.ReciepeintName = Utility.GetUserInput("recipints name to whom you have to transfer:");
             return InternalTransfer;
         }   
     }

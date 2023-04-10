@@ -120,7 +120,7 @@ namespace Practicle8
                     }
                 default:
                     {
-                        Utility.PrintMessage("Invalid Option", false);
+                        Utility.PrintMessage("Invalid option", false);
                         break;
                     }
             }
@@ -134,12 +134,12 @@ namespace Practicle8
             Console.WriteLine($"\nOnly multiple of 100 and 500 Rs. notes allowed.\n");
             var TransactionAmt = Validator.Convert<int>($"amount {AppScreen.cur}");
             //counting
-            Console.WriteLine("\nChecking and Counting notes.");
+            Console.WriteLine("\nChecking and counting notes.");
             Utility.PrintDotAnimation();
             Console.WriteLine("");
             if(TransactionAmt<=0)
             {
-                Utility.PrintMessage("Amount needs to be greater than zero. Try again.", false);
+                Utility.PrintMessage("Amount needs to be greater than zero. try again.", false);
                 return;
             }
             if(TransactionAmt%100!=0) 
@@ -160,7 +160,6 @@ namespace Practicle8
         }
         public void MakeWithDrawal()
         {
-            Console.WriteLine($"withdrawl till now{selectedAccount.WithdrawlAmount}");
             var transactionAmt = 0;
             int selectedAmount = AppScreen.SelectAmount();            
             if(selectedAmount!=0)
@@ -179,12 +178,12 @@ namespace Practicle8
                 return;
             }else if(selectedAccount.WithdrawlAmount + transactionAmt > 20000)
             {
-                Utility.PrintMessage($"{transactionAmt} is Exceeds withdrawal amount limits ", false);
+                Utility.PrintMessage($"{transactionAmt} is exceeds withdrawal of your daily 20,000 limit. ", false);
                 return;
             }
             else if(selectedAccount.WithdrawlAmount>20000 )
             {
-                Utility.PrintMessage("Exceeds withdrawal amount limits", false);
+                Utility.PrintMessage($"{selectedAccount.WithdrawlAmount} is exceeds withdrawal of your daily 20,000 limit.", false);
                 return;
             }
             else if(transactionAmt%100!=0)
@@ -298,16 +297,16 @@ namespace Practicle8
             }
             if (ReceiverAccount.AccountNumber == selectedAccount.AccountNumber)
             {                
-                Utility.PrintMessage("transfer failed! in same account transfer not allowed.", false);
+                Utility.PrintMessage("Transfer failed! in same account transfer not allowed.", false);
                 return;
             }
             else if(ReceiverAccount.AccountNumber != internalTransfer.ReciepeintAccNum)
             {                
-                Utility.PrintMessage("transfer failed due to receiver account number invalid ", false);
+                Utility.PrintMessage("Transfer failed due to receiver account number invalid ", false);
                 return;
             }else if(ReceiverAccount.FullName != internalTransfer.ReciepeintName)
             {
-                Utility.PrintMessage("transfer failed due to receiver name not match ", false);
+                Utility.PrintMessage("Transfer failed due to receiver name not match ", false);
                 return;
             }
             else 
@@ -320,7 +319,7 @@ namespace Practicle8
                 InsertTransaction(ReceiverAccount.Id, TransactionType.Transfer, internalTransfer.TransferAmount, $"{selectedAccount.AccountNumber}");
                 //update balance of receiver
                 ReceiverAccount.AccountBalance += internalTransfer.TransferAmount;
-                Utility.PrintMessage($"transfer of {Utility.FormatAmout(internalTransfer.TransferAmount)} succesfully to receiver account.\nReceiver Account number:{ReceiverAccount.AccountNumber}\nReceiver Name:{ReceiverAccount.FullName} ", true);
+                Utility.PrintMessage($"Transfer of {Utility.FormatAmout(internalTransfer.TransferAmount)} succesfully to receiver account.\nReceiver account number:{ReceiverAccount.AccountNumber}\nReceiver name:{ReceiverAccount.FullName} ", true);
                 return;
             }
         }       
